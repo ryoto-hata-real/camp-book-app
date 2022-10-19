@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  backend:
+    container_name: backend
+    build: ./app
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./app:/app
+    ports:
+      - "8080:8080"
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 8080
+    depends_on:
+      - db
+
+  front:
+    build:
+      context: ./front
+    command: yarn run dev
+    volumes:
+      - "./front:/app"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    
+  db:
+    image: postgres:14.5-alpine
+    environment:
+      # OSのタイムゾーン
+      TZ: UTC
+      # postgresのタイムゾーン
+      PGTZ: UTC
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./api/tmp/db:/var/lib/postgresql/data"
