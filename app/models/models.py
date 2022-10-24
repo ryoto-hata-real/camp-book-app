@@ -20,12 +20,12 @@ class Customer(Base):
 
   customer_id = Column(Integer, primary_key=True)
   client_id = Column(Integer, ForeignKey("users.client_id"), nullable=False)
-  booked_date: Column(Date, nullable=False)
-  customer_number: Column(Integer, nullable=False)
-  customer_name: Column(String, nullable=False)
-  customer_tel: Column(String, nullable=False)
-  customer_email: Column(String)
-  customer_remarks: Column(String)
+  booked_date = Column(Date, nullable=False)
+  customer_number = Column(Integer, nullable=False)
+  customer_name = Column(String, nullable=False)
+  customer_tel = Column(String, nullable=False)
+  customer_email = Column(String)
+  customer_remarks = Column(String)
 
   relationship("User", back_populates="customers")
 

@@ -2,7 +2,7 @@ from datetime import date
 from pydantic import BaseModel
 
 class CustomerBase(BaseModel):
-  client_id: str
+  client_id: int
   booked_date: date
   customer_number: int
   customer_name: str
@@ -15,16 +15,13 @@ class CustomerBase(BaseModel):
   
 
 class Customer(CustomerBase):
-  customer_id: str
-  created_at: date
-  daleted_at: date
+  customer_id: int
 
 class CustomerCreate(CustomerBase):
   pass
 
 class CustomerCreateResponse(CustomerCreate):
-  customer_id: str
-  created_at: date
+  customer_id: int
 
   class Config:
     orm_mode = True
