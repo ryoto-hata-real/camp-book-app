@@ -6,8 +6,9 @@ from database import Base
 class User(Base):
   __tablename__ = 'users'
 
-  client_id = Column(String(256), primary_key=True)
+  client_id = Column(Integer, primary_key=True, autoincrement=True)
   client_tel = Column(String(256), nullable=False)
+  client_email = Column(String(256), nullable=False)
   default_amount = Column(Integer)
   price = Column(Integer)
 
@@ -17,8 +18,8 @@ class User(Base):
 class Customer(Base):
   __tablename__ = 'customers'
 
-  customer_id = Column(String(256), primary_key=True)
-  client_id = Column(String(256), ForeignKey("users.client_id"), nullable=False)
+  customer_id = Column(Integer, primary_key=True)
+  client_id = Column(Integer, ForeignKey("users.client_id"), nullable=False)
   booked_date: Column(Date, nullable=False)
   customer_number: Column(Integer, nullable=False)
   customer_name: Column(String, nullable=False)
@@ -31,7 +32,7 @@ class Customer(Base):
 class Place(Base):
   __tablename__ = 'places'
 
-  client_id = Column(String(256), ForeignKey("users.client_id"), primary_key=True)
+  client_id = Column(Integer, ForeignKey("users.client_id"), primary_key=True)
   empty_amount = Column(Integer, nullable=False)
   date = Column(Date)
 
