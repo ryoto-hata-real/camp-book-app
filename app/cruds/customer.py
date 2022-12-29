@@ -12,6 +12,10 @@ async def create_customer(
     db.refresh(customer)
     return customer
 
+async def get_customers(db: Session):
+    customers = db.query(Customer).all()
+    return customers
+
 async def get_customer(db: Session, customer_id: int) -> Customer:
   customer = db.query(Customer).filter(Customer.customer_id == customer_id).first()
   return customer if customer is not None else None

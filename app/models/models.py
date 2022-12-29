@@ -9,6 +9,7 @@ class User(Base):
   client_id = Column(Integer, primary_key=True, autoincrement=True)
   client_tel = Column(String(256), nullable=False)
   client_email = Column(String(256), nullable=False)
+  client_name = Column(String(256), nullable=True)
   default_amount = Column(Integer)
   price = Column(Integer)
 

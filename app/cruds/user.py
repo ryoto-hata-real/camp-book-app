@@ -18,6 +18,9 @@ async def create_user(
     db.refresh(user)
     return user
 
+async def get_users(db:Session):
+  users = db.query(models.User).all()
+  return users
 
 async def get_user(db:Session, client_id: int) -> models.User:
   user = db.query(models.User).filter(models.User.client_id == client_id).first()

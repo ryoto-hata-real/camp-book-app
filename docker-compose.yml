@@ -22,7 +22,7 @@ services:
       context: ./front
     command: yarn run dev
     volumes:
-      - "./front:/app"
+      - "./front:/front"
     ports:
       - "3000:3000"
     depends_on:

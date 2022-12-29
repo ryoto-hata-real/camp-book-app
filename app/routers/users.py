@@ -13,8 +13,8 @@ router = APIRouter()
 
 
 @router.get("/users/", tags=["users"])
-async def read_users():
-    return [{"username": "Rick"}, {"username": "Morty"}]
+async def read_users(db: Session = Depends(get_db)):
+    return await user_crud.get_users(db)
 
 
 @router.get("/users/{client_id}", tags=["users"])

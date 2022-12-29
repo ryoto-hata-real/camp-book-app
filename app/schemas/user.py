@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 
 
 class UserBase(BaseModel):
+  client_name: str
   client_email: str
   client_tel: str
   default_amount: int
